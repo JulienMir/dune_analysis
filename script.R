@@ -11,9 +11,13 @@ source("named.R")
 raw_text <- readLines("Frank Herbert - Dune.txt", n=100)
 corpus <- Corpus(VectorSource(raw_text))
 
-corpus <- preprocess(corpus)
+pcorpus <- preprocess(corpus)
 
 dtm <- DocumentTermMatrix(pcorpus)
 dtm <- dtm[,which(table(dtm$j) >= 5)]
 tdm <- TermDocumentMatrix(pcorpus)
 tdm <- tdm[which(table(tdm$j) >= 5),]
+
+entities <- get_named_entity(pcorpus)
+
+print(entities)
