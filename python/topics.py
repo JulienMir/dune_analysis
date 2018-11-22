@@ -1,5 +1,5 @@
 
-def get_topics(nlp, corpus):
+def get_topics(corpus):
     res = []
 
     return res
