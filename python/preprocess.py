@@ -26,7 +26,7 @@ def preprocess():
 
     # On enlève les stopwords et on met en minuscule
     stop = set(stopwords.words('english'))
-    chapters_tokens = [[word for word in chapter.lower().split() if word not in stop]
+    chapters_tokens = [[word for word in chapter.split() if word.lower() not in stop]
             for chapter in chapters]
 
     # Calcul de la fréquence

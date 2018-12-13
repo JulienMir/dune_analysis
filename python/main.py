@@ -11,14 +11,14 @@ def main():
 		#files = '.*\.txt'
 		# corpus = PlaintextCorpusReader("./", files, encoding='latin-1')
 
-		texts = preprocess()
+		tokens = preprocess()
 
-		print("Read %d chapters" % len(texts))
+		print("Read %d chapters" % len(tokens))
 
-		entities = NamedEntities(texts)
+		entities = NamedEntities(tokens)
 		ne = entities.get_named_entities()
 
-		topics = get_topics(texts)
+		topics = get_topics(tokens, nb_topics=10, nb_words=15)
 
 		print("Name entities : ")
 		for i in range(len(ne)):
