@@ -9,7 +9,7 @@ import re
 def preprocess():
     tokens = []
 
-    dune = open('./Frank Herbert - Dune.txt')
+    dune = open('./Frank Herbert - Dune.txt', encoding = 'latin-1')
 
     
     lines = dune.read()
@@ -25,6 +25,7 @@ def preprocess():
     chapters = [re.sub(r' +', ' ', chapter) for chapter in chapters]
 
     # On enlève les stopwords et on met en minuscule
+    #nltk.download('stopwords')
     stop = set(stopwords.words('english'))
     chapters_tokens = [[word for word in chapter.lower().split() if word not in stop]
             for chapter in chapters]
