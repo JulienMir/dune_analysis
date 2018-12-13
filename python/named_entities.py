@@ -6,12 +6,13 @@ class NamedEntities:
     def __init__(self, corpus):
         # Modèle de langage utilisé par les différentes foncitons (anglais)
         # Requiert "python -m spacy download xx_ent_wiki_sm"
-        # model = 'en_core_web_sm'
+        self.model = 'en_core_web_sm'
         # Requiert "python -m spacy download xx_ent_wiki_sm"
-        self.model = 'xx_ent_wiki_sm'
+        # self.model = 'xx_ent_wiki_sm'
         self.nlp = spacy.load(self.model)
 
         self.corpus = corpus
+        self.docs = [self.nlp(' '.join(text)) for text in self.corpus]
         self.entities_list = None
 
 
@@ -23,15 +24,7 @@ class NamedEntities:
 
             res = []
 
-            for p in self.corpus:
-                para = ''
-                # On concatène chaque ligne du paragraphe
-                for l in p:
-                    para += ' '.join(l)
-
-                # On trouve les entitées nommées
-                doc = self.nlp(para)
-                
+            for doc in self.docs:                
                 # On les met dans un tableau et on compte les occurences
                 unique = []
                 for ent in doc.ents:

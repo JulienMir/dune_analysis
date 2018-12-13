@@ -14,7 +14,7 @@ def main():
     
     texts = preprocess(corpus)
 
-    print("Read %d texts" % len(texts))
+    print("Read %d chapters" % len(texts))
 
     entities = NamedEntities(texts)
     ne = entities.get_named_entities()
