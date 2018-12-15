@@ -18,16 +18,13 @@ def get_termDocumentMatrix(chapters):
     stop = set(stopwords.words('english'))
 
     vectorizer = TfidfVectorizer(ngram_range=(1, 1),
-                                     max_df=0.8,
-                                     min_df=1,
-                                     stop_words=stop)
+                                    sublinear_tf=True)
 
     vector_space = list()
     vocabulary = list()
     for c in chapters:
-        vector_space.append(vectorizer.fit_transform(c))
+        vector_space.append(np.transpose(vectorizer.fit_transform(c).todense()))
         vocab = vectorizer.get_feature_names()
         vocabulary.append(dict([(s, i) for i, s in enumerate(vocab)]))
 
-    return {'vocabulary'  : vocabulary,
-            'vector_space': vector_space }
+    return (vocabulary, vector_space)

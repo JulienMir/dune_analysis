@@ -12,16 +12,21 @@ def main():
 	#files = '.*\.txt'
 	# corpus = PlaintextCorpusReader("./", files, encoding='latin-1')
 
-    chapters = preprocess()
-   
-    tdm = get_termDocumentMatrix(chapters)
+	print('Starting preprocess...')
+	chapters = preprocess()
+
+	print('Creating TermDocumentMatrix...')
+	vocabulary, vector_space = get_termDocumentMatrix(chapters)
 		
-		named_entities = NamedEntities(chapters)
-		entities_list = named_entities.get_named_entities()
-		
-		entity_matrix = get_entity_matrix(entities_list, tdm)
-		
-		draw_entities_relation(entity_matrix)
+	print('Finding named entities...')
+	named_entities = NamedEntities(chapters)
+	entities_list = named_entities.get_named_entities()
+
+	print('Computing entities relationships...')
+	entity_matrix = get_entity_matrix(entities_list, vocabulary, vector_space)
+
+	print('Entities graph...')
+	draw_entities_relation(entity_matrix)
 
 
 if __name__ == '__main__':

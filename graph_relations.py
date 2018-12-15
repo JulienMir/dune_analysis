@@ -2,8 +2,12 @@ import networkx as nx
 
 import pandas as pd
 
+import matplotlib.pyplot as plt
 
-def draw_entities_relation(mat):
+
+def draw_entities_relation(entity_matrix):
+    mat = entity_matrix[1]
+
     entities_names = mat.columns
 
     G = nx.Graph()
@@ -12,7 +16,7 @@ def draw_entities_relation(mat):
         edges = []
 
         for i in range(j):
-            edges.append((entities_names[j], entities_names[i], mat.loc[entities_names[j], entities_names[i]]))
+            edges.append((entities_names[j], entities_names[i], 100*mat.loc[entities_names[j], entities_names[i]]))
 
         G.add_weighted_edges_from(edges)
 
