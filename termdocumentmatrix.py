@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 14 18:07:02 2018
-
-@author: pierre
-"""
-
-import numpy as np
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 

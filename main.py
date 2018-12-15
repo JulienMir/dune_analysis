@@ -1,5 +1,3 @@
-import numpy as np
-
 # import home-made modules
 from preprocess import preprocess
 from termdocumentmatrix import get_termDocumentMatrix
@@ -16,12 +14,13 @@ def main():
    
     tdm = get_termDocumentMatrix(chapters)
 		
-		named_entities = NamedEntities(chapters)
-		entities_list = named_entities.get_named_entities()
+    named_entities = NamedEntities(chapters)
+    
+    entities_list = named_entities.get_named_entities()
 		
-		entity_matrix = get_entity_matrix(entities_list, tdm)
+    entity_matrix = get_entity_matrix(entities_list, tdm)
 		
-		draw_entities_relation(entity_matrix)
+    draw_entities_relation(entity_matrix)
 
 
 if __name__ == '__main__':

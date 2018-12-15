@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 class NamedEntities:
     def __init__(self, chapters):
-        # Modèle de langage utilisé par les différentes foncitons (anglais)
+        # Modèle de langage utilisé par les différentes fonctions (anglais)
         # Requiert "python -m spacy download xx_ent_wiki_sm"
         self.model = 'en_core_web_sm'
         # Requiert "python -m spacy download xx_ent_wiki_sm"
@@ -16,7 +16,7 @@ class NamedEntities:
         self.nlp = spacy.load(self.model)
 
         self.chapters = chapters
-        self.docs = [self.nlp(chapter) for chapter in self.chapters]
+        self.docs = [self.nlp(" ".join(c)) for c in self.chapters]
         self.entities_list = None
 
     """
