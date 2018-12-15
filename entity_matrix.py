@@ -10,9 +10,14 @@ from nltk.corpus import stopwords
 
 
 def get_entity_matrix(entities_list, vocabulary, vector_space):
-	res = []
+	entity_matrix = []
 
 	stop = set(stopwords.words('english'))
+	stop.add('shall')
+	stop.add('said')
+	stop.add('ah')
+	stop.add('oh')
+	stop.add('ahah')
 
 	# Pour chaque chapitre
 	for k in range(len(entities_list)):
@@ -20,7 +25,7 @@ def get_entity_matrix(entities_list, vocabulary, vector_space):
 
 		print("Chapitre ", k)
 		entities_list[k] = [re.sub(r'[^\w\s]+', '', entity) for entity in entities_list[k]]
-		print(entities_list[k])
+		# print(entities_list[k])
 
 		# Pour l'entité j
 		for j in range(len(entities_list[k])):
@@ -61,7 +66,6 @@ def get_entity_matrix(entities_list, vocabulary, vector_space):
 						A = np.array([v1,v2]).reshape(2, v1.shape[1])
 
 						# On calcule la similarité cosinus entre un token de chaque entité
-						#ValueError: Found array with dim 3. check_pairwise_arrays expected <= 2.
 						tmp.append(cosine_similarity(A)[0,1])
 
 					# On moyenne entre chaque token de e2 et le premier de e1
@@ -73,6 +77,6 @@ def get_entity_matrix(entities_list, vocabulary, vector_space):
 			d[entities_list[k][j]] = pd.Series(tmp_res, index=entities_list[k])
 
 		# On passe la matrice en dataframe pour avoir les noms de colonnes
-		res.append(pd.DataFrame(d))
+		entity_matrix.append(pd.DataFrame(d))
 
-	return res
+	return entity_matrix

@@ -16,7 +16,7 @@ class NamedEntities:
         self.nlp = spacy.load(self.model)
 
         self.chapters = chapters
-        self.docs = [self.nlp('.'.join(chapter)) for chapter in self.chapters]
+        self.docs = [self.nlp(' '.join(chapter)) for chapter in self.chapters]
         self.entities_list = None
 
     """
@@ -24,23 +24,17 @@ class NamedEntities:
     """
     def get_named_entities(self):
         if self.entities_list is None:
+            # On les met dans un tableau et on compte les occurences
+            entities = []
+            for ent in self.docs.ents:
+                if (ent.label_ == "GPE" or 
+                    ent.label_ == "LOC" or 
+                    ent.label_ == "PERSON" or 
+                    ent.label_ == "ORG"):
 
-            res = []
+                    entities.append(ent.text)
 
-            for doc in self.docs:                
-                # On les met dans un tableau et on compte les occurences
-                entities = []
-                for ent in doc.ents:
-                    if (ent.label_ == "GPE" or 
-                        ent.label_ == "LOC" or 
-                        ent.label_ == "PERSON" or 
-                        ent.label_ == "ORG"):
-
-                        entities.append(ent.text)
-
-                # Liste d'entités uniques
-                res.append(list(set(entities)))
-
-            self.entities_list = res
+            # Liste d'entités uniques
+            self.entities_list.append(list(set(entities)))
 
         return self.entities_list

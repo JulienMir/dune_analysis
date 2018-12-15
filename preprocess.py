@@ -4,13 +4,13 @@ from nltk.corpus import stopwords
 
 
 def preprocess():
-    dune = open('./Frank Herbert - Dune.txt', encoding = 'latin-1')
+    dune = open('./ressources/Frank Herbert - Dune.txt', encoding = 'latin-1')
     
     lines = dune.read()
 
     # On sépare en chapitre
     chapters = lines.split('= = = = = =')
-    
+
     # Les chapitres en lignes
     chapters = [c.split('\n') for c in chapters]
 

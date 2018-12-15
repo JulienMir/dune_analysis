@@ -16,7 +16,12 @@ def draw_entities_relation(entity_matrix):
         edges = []
 
         for i in range(j):
-            edges.append((entities_names[j], entities_names[i], 100*mat.loc[entities_names[j], entities_names[i]]))
+            coef = mat.loc[entities_names[j], entities_names[i]]
+            if(coef < 0.5):
+                print('Skipped %s/%s'%(entities_names[j], entities_names[i]))
+                continue
+
+            edges.append((entities_names[j], entities_names[i], coef))
 
         G.add_weighted_edges_from(edges)
 

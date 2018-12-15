@@ -15,7 +15,7 @@ def get_termDocumentMatrix(chapters):
     # On enlève les stopwords et on met en minuscule
     # décommenter la ligne suivante si les stopwords n'ont pas été téléchargés
     #nltk.download('stopwords')
-    stop = set(stopwords.words('english'))
+    # stop = set(stopwords.words('english'))
 
     vectorizer = TfidfVectorizer(ngram_range=(1, 1),
                                     sublinear_tf=True)
