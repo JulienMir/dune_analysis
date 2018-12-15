@@ -17,16 +17,15 @@ class NamedEntities:
 
         self.chapters = chapters
         self.docs = [self.nlp(' '.join(chapter)) for chapter in self.chapters]
-        self.entities_list = None
+        self.entities_list = []
 
     """
     Renvoie une liste par chapitre contenant les entités et leur nombre d'occurences.
     """
     def get_named_entities(self):
-        if self.entities_list is None:
-            # On les met dans un tableau et on compte les occurences
+        for doc in self.docs:
             entities = []
-            for ent in self.docs.ents:
+            for ent in doc.ents:
                 if (ent.label_ == "GPE" or 
                     ent.label_ == "LOC" or 
                     ent.label_ == "PERSON" or 
