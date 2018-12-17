@@ -6,30 +6,31 @@ import matplotlib.pyplot as plt
 
 
 def draw_entities_relation(entity_matrix, topics):
-    mat = entity_matrix[1]
+    for k in range(len(entity_matrix)):
+        mat = entity_matrix[k]
+        entities_names = mat.columns
 
-    entities_names = mat.columns
+        G = nx.Graph()
+        
+        for j in range(len(entities_names)):
+            edges = []
 
-    G = nx.Graph()
-    
-    for j in range(len(entities_names)):
-        edges = []
+            for i in range(j):
+                coef = mat.loc[entities_names[j], entities_names[i]]
+                
+                if coef > 0.1:
+                    edges.append((entities_names[j], entities_names[i], coef))
 
-        for i in range(j):
-            coef = mat.loc[entities_names[j], entities_names[i]]
-            if(coef < 0.5):
-                print('Skipped %s/%s with coef %f'%(entities_names[j], entities_names[i], coef))
-                continue
+            G.add_weighted_edges_from(edges)
 
-            edges.append((entities_names[j], entities_names[i], coef))
+        pos = nx.spring_layout(G)
+        nx.draw(G, pos, font_size=16, with_labels=False)
 
-        G.add_weighted_edges_from(edges)
-
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, font_size=16, with_labels=False)
-
-	# On décale le texte
-    for p in pos:
-        pos[p][1] += 0.07
-    nx.draw_networkx_labels(G, pos)
-    plt.show()
+        # On décale le texte
+        for p in pos:
+            pos[p][1] += 0.07
+        nx.draw_networkx_labels(G, pos)
+        plt.title('Chapitre ' + str(k+1), fontweight='bold', fontdict={
+            'fontsize': 15,
+        })
+        plt.show()
