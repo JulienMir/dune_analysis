@@ -12,13 +12,14 @@ from nltk.corpus import stopwords
 def get_entity_matrix(entities_list, vocabulary, vector_space):
 	entity_matrix = []
 
-	#stop = set(stopwords.words('english'))
-	#stop.add('shall')
-	#stop.add('said')
-	#stop.add('ah')
-	#stop.add('oh')
-	#stop.add('ahah')
+	stop = set(stopwords.words('english'))
+	stop.add('shall')
+	stop.add('said')
+	stop.add('ah')
+	stop.add('oh')
+	stop.add('ahah')
 
+    
 	# Pour chaque chapitre
 	for k in range(len(entities_list)):
 		d = dict()
