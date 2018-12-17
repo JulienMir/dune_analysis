@@ -18,6 +18,7 @@ def draw_entities_relation(entity_matrix, topics):
             for i in range(j):
                 coef = mat.loc[entities_names[j], entities_names[i]]
                 
+                # Seuil de similarité entre entités
                 if coef > 0.1:
                     edges.append((entities_names[j], entities_names[i], coef))
 

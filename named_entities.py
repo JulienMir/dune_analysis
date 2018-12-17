@@ -56,9 +56,11 @@ def get_named_entities(chapters):
 
     return entities_list
 
-def filter_entities(entities_list):
-    entities_occurences = defaultdict(int)
 
+
+def filter_entities(entities_list):
+    # On compte le nombre de fois qu'une entité apparait
+    entities_occurences = defaultdict(int)
     for k in range(len(entities_list)):
         for entity in entities_list[k]:
             entities_occurences[entity.lower()] += 1
@@ -67,18 +69,18 @@ def filter_entities(entities_list):
     for k in range(len(entities_list)):
         to_remove = []
         for j in range(len(entities_list[k])):
-            # ON evité les apax
+            # On evite les apax
             if entities_occurences[entities_list[k][j].lower()] < 2:
                 to_remove.append(entities_list[k][j])
                 continue
                 
             for i in range(j+1, len(entities_list[k])):
-                # ON evité les apax
+                # On evite les apax
                 if entities_occurences[entities_list[k][i].lower()] < 3:
                     to_remove.append(entities_list[k][i])
                     continue
                     
-                # Une entité en contient une autre
+                # Si une entité en contient une autre
                 if (entities_list[k][j].find(entities_list[k][i]) != -1 or 
                     entities_list[k][i].find(entities_list[k][j]) != -1):
                     
