@@ -14,9 +14,9 @@ def main():
     print('Loading corpus...')
     chapters = load_corpus()
 
-    print('Finding named entities...')
-    entities_list = get_named_entities(chapters)
-    entities_list = filter_entities(entities_list)
+    # print('Finding named entities...')
+    # entities_list = get_named_entities(chapters)
+    # entities_list = filter_entities(entities_list)
 
     print('Processing corpus...')
     chapters_processed = preprocess(chapters)

@@ -3,7 +3,7 @@ import re
 from nltk.corpus import stopwords
 
 def load_corpus():
-    dune = open('./ressources/Frank Herbert - Dune.txt', encoding = 'latin-1')
+    dune = open('./Frank Herbert - Dune.txt', encoding = 'latin-1')
     
     lines = dune.read()
 

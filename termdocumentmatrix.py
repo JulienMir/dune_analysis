@@ -21,3 +21,5 @@ def get_termDocumentMatrix(chapters_processed):
         vector_space.append(np.transpose(vectorizer.fit_transform(c).todense()))
         vocab = vectorizer.get_feature_names()
         vocabulary.append(dict([(s, i) for i, s in enumerate(vocab)]))
+
+    return vocabulary, vector_space
